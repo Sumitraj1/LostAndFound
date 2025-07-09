@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+{% extends 'home.html' %}
+{% block title %}Point Purchase{% endblock %}
+{% block content %}
+{% load static %}
+<h4></h4>
+<h3>Purchase Points via UPI ID</h3>
+<hr>
+
+{% if messages %}
+{% for result in messages %}
+<div>&ensp;</div>
+{% if result.tags == "error" %}
+<div class="alert alert-danger">
+    {{ result }}
+</div>
+{% else %}
+<div class="alert alert-success">
+    {{ result }}
+</div>
+{% endif %}
+{% endfor %}
+{% endif %}
+
+<div class="row" style="align-items: center;">
+    <div class="col-4"></div>
+    <div class="col-4"><img src="{% static 'images/payment.webp' %}" height="100px" alt="payment-logo"></div>
+    <div class="col-4"></div>
+</div>
+<div style="white-space: pre-wrap;">
+    Make Payment via UPI ID
+
+    Send Money
+
+    Products and Services - Send Money
+
+    With the Send Money service, you can send money from one UPI ID to another at any time. Follow these steps to send money:
+
+    1. Open Your Online Payment App(Gpay,Phonepe,Paytm etc.).
+    2. Select "Send Money".
+    3. Enter our UPI ID (abc@yml,abc@oxici).
+    4. Enter the amount you want to send.
+    5. Provide a reference/information for the transaction (use only one word, avoid spaces and special characters).
+    6. Complete the transaction by entering your UPI PIN.
+
+    Both you and the recipient will receive a confirmation message from Your Bank.
+
+    
+
+</div>
+
+<div style="margin-bottom: 1em; margin-top: 1em;">
+    <table class="table table-bordered" style="color: rgb(13, 184, 13);">
+        <thead>
+            <tr>
+                <th scope="col" style="color: rgb(13, 184, 13);">#</th>
+                <th scope="col" style="color: rgb(13, 184, 13);">Point</th>
+                <th scope="col" style="color: rgb(13, 184, 13);">Price</th>
+                <th scope="col" style="color: rgb(13, 184, 13);">Total (with charge +1.8%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th style="color: rgb(13, 184, 13);" scope="row">1</th>
+                <td style="color: rgb(13, 184, 13);">50 points</td>
+                <td style="color: rgb(13, 184, 13);">5/- RS</td>
+                <td style="color: rgb(13, 184, 13);">5.09/- RS</td>
+            </tr>
+            <tr>
+                <th style="color: rgb(13, 184, 13);" scope="row">2</th>
+                <td style="color: rgb(13, 184, 13);">100 points</td>
+                <td style="color: rgb(13, 184, 13);">10/- RS</td>
+                <td style="color: rgb(13, 184, 13);">10.18/- RS</td>
+            </tr>
+            <tr>
+                <th style="color: rgb(13, 184, 13);" scope="row">3</th>
+                <td style="color: rgb(13, 184, 13);">150 points</td>
+                <td style="color: rgb(13, 184, 13);">15/- RS</td>
+                <td style="color: rgb(13, 184, 13);">15.27/- RS</td>
+            </tr>
+            <tr>
+                <th style="color: rgb(13, 184, 13);" scope="row">4</th>
+                <td style="color: rgb(13, 184, 13);">200 points</td>
+                <td style="color: rgb(13, 184, 13);">20/- RS</td>
+                <td style="color: rgb(13, 184, 13);">20.36/- RS</td>
+            </tr>
+            <tr>
+                <th style="color: rgb(13, 184, 13);" scope="row">5</th>
+                <td style="color: rgb(13, 184, 13);">250 points</td>
+                <td style="color: rgb(13, 184, 13);">25/- RS</td>
+                <td style="color: rgb(13, 184, 13);">25.45/- RS</td>
+            </tr>
+            <tr>
+                <th style="color: rgb(13, 184, 13);" scope="row">6</th>
+                <td style="color: rgb(13, 184, 13);">300 points</td>
+                <td style="color: rgb(13, 184, 13);">30/- RS</td>
+                <td style="color: rgb(13, 184, 13);">30.63/- RS</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-group row">
+        <label for="inputName" class="col-sm-2 col-form-label"><b>Your Name</b></label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputName" placeholder="e.g: John Doe" name="inputName"
+                required value="{{user.name}}">
+        </div>
+    </div>
+    <br>
+    <div class="form-group row">
+        <label for="inputEmail" class="col-sm-2 col-form-label"><b>Your Email</b></label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputEmail" placeholder="e.g: xyz@gmail.com"
+                name="inputEmail" required value="{{user.email}}">
+        </div>
+    </div>
+    <br>
+    <div class="form-group row">
+        <label for="inputBkash" class="col-sm-2 col-form-label"><b>Your UPI ID</b></label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputBkash" placeholder="e.g: abc@yml,abc@oxici" name="phoneNumber"
+                required value="{{user.phoneNumber}}">
+        </div>
+    </div>
+    <br>
+    <div class="form-group row">
+        <label for="inputTransaction" class="col-sm-2 col-form-label"><b> Transaction ID</b></label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputTransaction" placeholder="e.g: xxxxxxxxxxxx"
+                name="transactionId" required>
+        </div>
+    </div>
+    <br>
+    <div class="form-group row">
+        <label for="inputPoint" class="col-sm-2 col-form-label"><b>Points</b></label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputPoint" placeholder="e.g: 123 points" name="inputPoint"
+                required>
+        </div>
+    </div>
+
+    <div>&ensp;</div>
+
+    <button type="submit" class="btn btn-outline-primary" name="payment">Request for Points</button>
+    <br>
+    <br>
+    <br>
+
+</form>
+{% endblock %}
